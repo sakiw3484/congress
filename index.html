@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legislation Tracker</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #001f3f, #ff4136);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }z
+
+        .flag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('american-flag.jpg') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        .slide-in:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Styled Button */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: white;
+            color: #001f3f;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flag"></div>
+    <h1 class="slide-in">what is our government doing...</h1>
+    <p class="slide-in">Making laws and executive orders easy to understand.</p>
+
+    <a href="main.html" class="btn">Enter</a>
+</body>
+
+</html>
