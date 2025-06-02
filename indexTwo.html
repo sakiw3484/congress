@@ -1,0 +1,55 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Congress Bill Search</title>
+</head>
+
+<body>
+    <h1>Search a Bill</h1>
+    <input id="billInput" type="text" placeholder="e.g., hr21" />
+    <button onclick="searchBill()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        async function searchBill() {
+            const input = document.getElementById('billInput').value.toLowerCase().trim();
+            const match = input.match(/(hr|s)(\d+)/); // matches 'hr21' or 's123'
+
+            if (!match) {
+                alert('Please enter a bill like "hr21" or "s123".');
+                return;
+            }
+
+            const type = match[1];
+            const number = match[2];
+            const congress = 118; // hardcoded for now
+
+            const url = `https://api.congress.gov/v3/bill/${congress}/${type}/${number}?api_key=9lIypQcPVxgpd9rvrloDeaWEALfoe0EdNuefN5lk`;
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+
+                // Display info nicely
+                const bill = data.bill;
+                const resultDiv = document.getElementById('results');
+                resultDiv.innerHTML = `
+          <h2>${bill.title}</h2>
+          <p><strong>Type:</strong> ${bill.type}</p>
+          <p><strong>Bill Number:</strong> ${bill.number}</p>
+          <p><strong>Congress:</strong> ${bill.congress}</p>
+          <p><strong>Introduced Date:</strong> ${bill.introducedDate}</p>
+        `;
+            } catch (err) {
+                console.error(err);
+                document.getElementById('results').innerHTML = `<p>Error fetching bill details.</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>
